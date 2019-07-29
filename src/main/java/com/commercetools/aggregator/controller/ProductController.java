@@ -32,7 +32,8 @@ public class ProductController {
     private int maxPageSize;
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity getProducts(@RequestParam(required = false) int pageIndex, @RequestParam(required = false) int pageSize) {
+    public ResponseEntity getProducts(@RequestParam(required = false, defaultValue = "0") int pageIndex, @RequestParam(required = false, defaultValue = "30") int pageSize) {
+
         if (pageSize == 0 || pageSize > maxPageSize) {
             String errorMessage = String.format(PAGE_SIZE_ERROR_MESSAGE, maxPageSize);
             log.error(errorMessage);
